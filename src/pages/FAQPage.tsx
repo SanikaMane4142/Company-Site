@@ -7,19 +7,49 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "What is Cocpit?",
+    question: "What exactly is Cocpit?",
     answer:
-      "Cocpit is an AI-based professional execution platform built for signal, not noise."
+      "Cocpit is an AI-based professional social networking platform built for people who want execution, not engagement. It connects ideas, talent, and decisions into one intelligent system."
+  },
+  {
+    question: "Why do we need another professional network?",
+    answer:
+      "You don’t. You need one that actually helps you build something instead of collecting followers, likes, and dead connections."
   },
   {
     question: "How is Cocpit different from LinkedIn?",
     answer:
-      "LinkedIn rewards noise. Cocpit rewards clarity, execution, and decisions."
+      "LinkedIn rewards noise. Cocpit rewards signal. No vanity metrics, no empty networking—just people, ideas, and AI-driven execution paths."
   },
   {
-    question: "Who is Cocpit for?",
+    question: "What does the AI actually do?",
     answer:
-      "Builders, founders, operators, and professionals who care about outcomes — not vanity metrics."
+      "It doesn’t write cringe posts. It helps you match with the right people, structure ideas, identify gaps, and move faster—quietly, intelligently, and purposefully."
+  },
+  {
+    question: "Who is Cocpit not for?",
+    answer:
+      "If you’re here for clout, motivation quotes, or hustle culture, this isn’t for you. Cocpit is for builders, operators, and thinkers who want outcomes."
+  },
+  {
+    question: "Is my data safe, or is this another data-mining platform?",
+    answer:
+      "Cocpit is built with privacy-first architecture. Your data is used to improve your execution, not to sell ads or train irrelevant models."
+  },
+  {
+    question: "Why should I join before launch?",
+    answer:
+      "Because platforms don’t reward late believers. Early users shape the system, influence features, and get access before the noise arrives."
+  },
+  {
+    question: "Is Cocpit ready, or is this just hype?",
+    answer:
+      "The system is being built deliberately. Pre-launch exists to onboard serious users, stress-test ideas, and eliminate everything that doesn’t create value."
+  },
+  {
+    question: "What happens if I don’t join now?",
+    answer:
+      "Nothing. Your idea might just end up where most do—forgotten, unfunded, and outpaced."
   }
 ];
 

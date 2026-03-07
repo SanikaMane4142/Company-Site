@@ -74,7 +74,6 @@ const Navbar: React.FC = () => {
             Features
           </a>
 
-          {/* UPDATED ABOUT LINK */}
           <Link
             to="/about"
             style={{
@@ -129,7 +128,7 @@ const Navbar: React.FC = () => {
       <div
         style={{
           position: "fixed",
-          top: "75px",
+          top: "110px",   // ✅ increased spacing from navbar
           right: "2rem",
           zIndex: 999,
           transform: showBadge ? "translateY(0)" : "translateY(-25px)",
