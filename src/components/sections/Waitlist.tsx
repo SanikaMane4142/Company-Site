@@ -57,7 +57,7 @@ const Waitlist: React.FC = () => {
                             }
                         />
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit"style={{ height: '40px', padding: '0 16px' }}>
                             Join Now
                         </Button>
                     </form>

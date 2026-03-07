@@ -136,7 +136,6 @@
 //   console.log('Server running on http://localhost:5000');
 // });
 
-
 require("dotenv").config();
 
 const express = require("express");
@@ -144,8 +143,8 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const nodemailer = require("nodemailer");
 const multer = require("multer");
-const path = require("path");
 const fs = require("fs");
+const { createClient } = require("@supabase/supabase-js");
 
 const app = express();
 
@@ -155,12 +154,17 @@ app.use(express.urlencoded({ extended: true }));
 
 // ================= DATABASE =================
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+// ================= SUPABASE =================
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
 
 // ================= FILE UPLOAD =================
 const uploadDir = "./uploads";
@@ -187,8 +191,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// check connection
-transporter.verify((error, success) => {
+transporter.verify((error) => {
   if (error) {
     console.error("Email server error:", error);
   } else {
@@ -196,8 +199,8 @@ transporter.verify((error, success) => {
   }
 });
 
-// ================= CREATE TABLE =================
-const createTable = async () => {
+// ================= CREATE TABLES =================
+const createTables = async () => {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS applications (
       id SERIAL PRIMARY KEY,
@@ -209,13 +212,62 @@ const createTable = async () => {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `);
+
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS waitlist (
+      id SERIAL PRIMARY KEY,
+      email VARCHAR(255) UNIQUE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
 };
 
-createTable();
+createTables();
+
+// ================= WAITLIST =================
+app.post("/api/waitlist", async (req, res) => {
+  try {
+
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        message: "Email is required",
+      });
+    }
+
+    await pool.query(
+      "INSERT INTO waitlist (email) VALUES ($1)",
+      [email]
+    );
+
+    console.log("New waitlist signup:", email);
+
+    res.json({
+      message: "Successfully joined the waitlist 🚀",
+    });
+
+  } catch (error) {
+
+    if (error.code === "23505") {
+      return res.status(400).json({
+        message: "You are already on the waitlist",
+      });
+    }
+
+    console.error("Waitlist error:", error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+});
 
 // ================= APPLY JOB =================
 app.post("/api/apply", upload.single("resume"), async (req, res) => {
+
   try {
+
     const { name, email, message, role } = req.body;
     const resumeFile = req.file;
 
@@ -225,7 +277,28 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
       });
     }
 
-    // 1️⃣ Save to database
+    let resumeFileName = null;
+
+    // ===== Upload resume to Supabase Storage =====
+    if (resumeFile) {
+
+      const fileBuffer = fs.readFileSync(resumeFile.path);
+      const fileName = Date.now() + "-" + resumeFile.originalname;
+
+      const { error } = await supabase.storage
+        .from("resumes")
+        .upload(fileName, fileBuffer, {
+          contentType: resumeFile.mimetype,
+        });
+
+      if (error) {
+        console.error("Supabase upload error:", error);
+      } else {
+        resumeFileName = fileName;
+      }
+    }
+
+    // ===== Save to Database =====
     await pool.query(
       `INSERT INTO applications 
       (name, role, email, message, resume)
@@ -235,15 +308,17 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
         role || "General Application",
         email,
         message || "",
-        resumeFile ? resumeFile.filename : null,
+        resumeFileName,
       ]
     );
 
-    // 2️⃣ Send Email
+    // ===== Send Email =====
     await transporter.sendMail({
+
       from: `"Cocpit Careers" <${process.env.EMAIL_USER}>`,
       to: process.env.HR_EMAIL,
       subject: `New Job Application - ${role || "General Application"}`,
+
       html: `
         <h2>New Job Application</h2>
 
@@ -252,6 +327,7 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
         <p><strong>Role:</strong> ${role || "General Application"}</p>
         <p><strong>Message:</strong> ${message || "No message provided"}</p>
       `,
+
       attachments: resumeFile
         ? [
             {
@@ -262,12 +338,20 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
         : [],
     });
 
+    // ===== Delete temp file AFTER email =====
+    if (resumeFile && fs.existsSync(resumeFile.path)) {
+      fs.unlinkSync(resumeFile.path);
+    }
+
     console.log("Application submitted:", name);
 
     res.json({
+      success: true,
       message: "Application submitted successfully",
     });
+
   } catch (error) {
+
     console.error("Application Error:", error);
 
     res.status(500).json({
@@ -277,6 +361,8 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
 });
 
 // ================= START SERVER =================
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server running on http://localhost:${process.env.PORT}`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
