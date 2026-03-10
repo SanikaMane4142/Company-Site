@@ -1,4 +1,5 @@
 import React from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
 
 interface CardProps {
     children: React.ReactNode;
@@ -15,12 +16,14 @@ const Card: React.FC<CardProps> = ({
     hoverEffect = true,
     style = {}
 }) => {
+    const isMobile = useIsMobile();
+
     return (
         <div
             className={`glass ${hoverEffect ? 'hover-lift' : ''} ${className}`}
             style={{
-                padding: padding ? 'var(--space-md)' : '0',
-                borderRadius: 'var(--radius-lg)',
+                padding: padding ? (isMobile ? '1rem' : 'var(--space-md)') : '0',
+                borderRadius: isMobile ? '14px' : 'var(--radius-lg)',
                 overflow: 'hidden',
                 height: '100%',
                 ...style

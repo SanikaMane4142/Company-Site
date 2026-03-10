@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import useIsMobile from "../../hooks/useIsMobile";
 
 const DualBlobOrbit: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div
       style={{
@@ -42,10 +45,10 @@ const DualBlobOrbit: React.FC = () => {
             ease: "easeInOut",
           }}
           style={{
-            width: 260,
-            height: 260,
+            width: isMobile ? 180 : 260,
+            height: isMobile ? 180 : 260,
             position: "absolute",
-            top: "-80px",
+            top: isMobile ? "-40px" : "-80px",
             background:
               "linear-gradient(135deg, #7C5CFF, #4F46E5)",
             opacity: 0.35,
@@ -69,10 +72,10 @@ const DualBlobOrbit: React.FC = () => {
             ease: "easeInOut",
           }}
           style={{
-            width: 220,
-            height: 220,
+            width: isMobile ? 150 : 220,
+            height: isMobile ? 150 : 220,
             position: "absolute",
-            bottom: "-60px",
+            bottom: isMobile ? "-30px" : "-60px",
             background:
               "linear-gradient(135deg, #6366F1, #3B82F6)",
             opacity: 0.3,

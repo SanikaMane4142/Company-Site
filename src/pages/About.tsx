@@ -1,16 +1,19 @@
 import React from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 const About: React.FC = () => {
+  const isMobile = useIsMobile();
+
   return (
     <main>
 
       {/* HERO / INTRO */}
-      <section style={{ padding: "var(--space-lg) 0" }}>
+      <section style={{ padding: isMobile ? "var(--space-md) 0" : "var(--space-lg) 0", paddingTop: isMobile ? "80px" : undefined }}>
         <div className="container">
 
           <h1
             style={{
-              fontSize: "3rem",
+              fontSize: "clamp(1.8rem, 5vw, 3rem)",
               marginBottom: "1rem",
               textAlign: "center",
             }}
@@ -24,7 +27,8 @@ const About: React.FC = () => {
               textAlign: "center",
               maxWidth: "750px",
               margin: "0 auto",
-              fontSize: "1.05rem",
+              fontSize: isMobile ? "0.95rem" : "1.05rem",
+              padding: isMobile ? "0 0.5rem" : undefined,
             }}
           >
             Cocpit is the next-generation professional networking platform where
@@ -36,14 +40,14 @@ const About: React.FC = () => {
       </section>
 
       {/* WHAT WE DO */}
-      <section style={{ padding: "var(--space-lg) 0" }}>
+      <section style={{ padding: isMobile ? "var(--space-md) 0" : "var(--space-lg) 0" }}>
         <div className="container">
 
-          <h2 style={{ marginBottom: "1rem" }}>
+          <h2 style={{ marginBottom: "1rem", fontSize: isMobile ? "1.5rem" : undefined }}>
             What We <span className="gradient-text">Do</span>
           </h2>
 
-          <p style={{ color: "var(--text-secondary)", maxWidth: "850px" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: "850px", fontSize: isMobile ? "0.95rem" : undefined }}>
             Cocpit brings together schools, colleges, students, employees,
             employers, businesses, investors, and startups in one intelligent
             ecosystem. Whether you're a student exploring career opportunities,
@@ -56,14 +60,14 @@ const About: React.FC = () => {
       </section>
 
       {/* AI DIFFERENCE */}
-      <section style={{ padding: "var(--space-lg) 0" }}>
+      <section style={{ padding: isMobile ? "var(--space-md) 0" : "var(--space-lg) 0" }}>
         <div className="container">
 
-          <h2 style={{ marginBottom: "1rem" }}>
+          <h2 style={{ marginBottom: "1rem", fontSize: isMobile ? "1.5rem" : undefined }}>
             The AI <span className="gradient-text">Difference</span>
           </h2>
 
-          <p style={{ color: "var(--text-secondary)", maxWidth: "850px" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: "850px", fontSize: isMobile ? "0.95rem" : undefined }}>
             Everything you do on Cocpit is powered by artificial intelligence.
             From crafting the perfect profile and discovering relevant
             connections to matching opportunities and facilitating meaningful
@@ -76,10 +80,11 @@ const About: React.FC = () => {
               color: "var(--text-secondary)",
               marginTop: "1rem",
               maxWidth: "850px",
+              fontSize: isMobile ? "0.95rem" : undefined,
             }}
           >
             Think of Cocpit as your personal AI assistant for professional
-            growth. We don’t just connect people; we understand your goals,
+            growth. We don't just connect people; we understand your goals,
             anticipate your needs, and help you make decisions that matter.
           </p>
 
@@ -87,14 +92,14 @@ const About: React.FC = () => {
       </section>
 
       {/* VISION */}
-      <section style={{ padding: "var(--space-lg) 0" }}>
+      <section style={{ padding: isMobile ? "var(--space-md) 0" : "var(--space-lg) 0" }}>
         <div className="container">
 
-          <h2 style={{ marginBottom: "1rem" }}>
+          <h2 style={{ marginBottom: "1rem", fontSize: isMobile ? "1.5rem" : undefined }}>
             Our <span className="gradient-text">Vision</span>
           </h2>
 
-          <p style={{ color: "var(--text-secondary)", maxWidth: "850px" }}>
+          <p style={{ color: "var(--text-secondary)", maxWidth: "850px", fontSize: isMobile ? "0.95rem" : undefined }}>
             We believe professional networking should be intelligent,
             intuitive, and accessible to everyone. Whether you're taking
             your first career steps or scaling your business to new heights,
@@ -106,18 +111,18 @@ const About: React.FC = () => {
       </section>
 
       {/* CONTACT CARDS */}
-      <section style={{ padding: "var(--space-lg) 0" }}>
+      <section style={{ padding: isMobile ? "var(--space-md) 0" : "var(--space-lg) 0" }}>
         <div className="container">
 
-          <h2 style={{ marginBottom: "2rem" }}>
+          <h2 style={{ marginBottom: "2rem", fontSize: isMobile ? "1.5rem" : undefined }}>
             Get In Touch <span className="gradient-text">With Us</span>
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-              gap: "var(--space-md)",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
+              gap: isMobile ? "1rem" : "var(--space-md)",
             }}
           >
 
