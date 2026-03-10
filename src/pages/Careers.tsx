@@ -582,7 +582,7 @@ const Careers: React.FC = () => {
     if (resume) formData.append("resume", resume);
 
     try {
-      const response = await fetch("http://localhost:5000/api/apply", {
+      const response = await fetch("/api/apply", {
         method: "POST",
         body: formData
       });
@@ -656,16 +656,16 @@ const Careers: React.FC = () => {
   return (
     <div style={{ minHeight: "100vh", background: "#050505", color: "#fff", position: "relative", overflow: "hidden", paddingTop: "100px" }}>
 
-  
-      <canvas 
-  ref={canvasRef} 
-  style={{ 
-    position: "fixed", 
-    inset: 0, 
-    zIndex: 0,
-    pointerEvents: "none"   // prevents blocking clicks
-  }} 
-/>
+
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none"   // prevents blocking clicks
+        }}
+      />
 
       <div style={{ position: "relative", zIndex: 2 }}>
 

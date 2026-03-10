@@ -26,7 +26,7 @@ const ApplicationModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (resume) data.append("resume", resume);
 
     try {
-      const res = await fetch("http://localhost:5000/apply", {
+      const res = await fetch("/api/apply", {
         method: "POST",
         body: data,
       });

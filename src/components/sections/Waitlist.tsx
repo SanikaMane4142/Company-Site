@@ -13,7 +13,7 @@ const Waitlist: React.FC = () => {
         if (!email) return;
 
         try {
-            const response = await fetch('http://localhost:5000/api/waitlist', {
+            const response = await fetch('/api/waitlist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Waitlist: React.FC = () => {
                         Be the first to experience the future of digital navigation. Limited spots available for the beta release.
                     </p>
 
-                    <form 
+                    <form
                         onSubmit={handleSubmit}
                         style={{ display: 'flex', gap: '0.5rem', maxWidth: '500px', margin: '0 auto' }}
                     >
@@ -57,7 +57,7 @@ const Waitlist: React.FC = () => {
                             }
                         />
 
-                        <Button variant="primary" type="submit"style={{ height: '40px', padding: '0 16px' }}>
+                        <Button variant="primary" type="submit" style={{ height: '40px', padding: '0 16px' }}>
                             Join Now
                         </Button>
                     </form>
