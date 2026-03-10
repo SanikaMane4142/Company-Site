@@ -145,7 +145,7 @@ const nodemailer = require("nodemailer");
 const multer = require("multer");
 const fs = require("fs");
 const { createClient } = require("@supabase/supabase-js");
-
+const serverless = require("serverless-http");
 const app = express();
 
 app.use(cors());
@@ -361,8 +361,4 @@ app.post("/api/apply", upload.single("resume"), async (req, res) => {
 });
 
 // ================= START SERVER =================
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = serverless(app);

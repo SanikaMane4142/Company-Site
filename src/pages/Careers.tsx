@@ -582,7 +582,8 @@ const Careers: React.FC = () => {
     if (resume) formData.append("resume", resume);
 
     try {
-      const response = await fetch("http://localhost:5000/api/apply", {
+      // const response = await fetch("http://localhost:5000/api/apply", {
+      fetch(`${import.meta.env.VITE_API_URL}/api/apply`, {
         method: "POST",
         body: formData
       });
