@@ -26,7 +26,7 @@ const ApplicationModal: React.FC<Props> = ({ isOpen, onClose }) => {
     if (resume) data.append("resume", resume);
 
     try {
-      const res = await fetch("http://localhost:5000/apply", {
+      const res = await fetch("/api/apply", {
         method: "POST",
         body: data,
       });
@@ -59,14 +59,14 @@ const ApplicationModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
           {/* Modal */}
           <motion.div
-            className="fixed z-50 inset-0 flex items-center justify-center p-6"
+            className="fixed z-50 inset-0 flex items-center justify-center p-4 sm:p-6"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
           >
-            <div className="bg-[#111] text-white p-8 rounded-xl w-full max-w-lg shadow-xl">
+            <div className="bg-[#111] text-white p-6 sm:p-8 rounded-xl w-full max-w-lg shadow-xl border border-gray-800">
 
-              <h2 className="text-2xl font-semibold mb-6">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-6">
                 Apply for this role
               </h2>
 

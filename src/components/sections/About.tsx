@@ -1,95 +1,36 @@
-// import React from "react";
-// import DualBlobOrbit from "../ui/DualBlobOrbit";
-
-// const About: React.FC = () => {
-//   return (
-//     <section id="about" style={{ padding: "var(--space-lg) 0" }}>
-//       <div className="container">
-//         <div
-//           style={{
-//             display: "grid",
-//             gridTemplateColumns:
-//               "repeat(auto-fit, minmax(300px, 1fr))",
-//             gap: "var(--space-lg)",
-//             alignItems: "center",
-//           }}
-//         >
-//           {/* LEFT TEXT */}
-//           <div>
-//             <h2
-//               style={{
-//                 fontSize: "2.5rem",
-//                 marginBottom: "var(--space-sm)",
-//               }}
-//             >
-//               Mission Control for your{" "}
-//               <span className="gradient-text">
-//                 Business
-//               </span>
-//             </h2>
-
-//             <p
-//               style={{
-//                 color: "var(--text-secondary)",
-//                 marginBottom: "1rem",
-//               }}
-//             >
-//               At Cocpit, we believe that complexity
-//               shouldn't be a barrier to growth.
-//             </p>
-
-//             <p style={{ color: "var(--text-secondary)" }}>
-//               Whether you're a startup or an enterprise,
-//               Cocpit provides the visibility you need.
-//             </p>
-//           </div>
-
-//           {/* RIGHT SIDE - DUAL ORBIT BLOBS */}
-//           <div
-//             style={{
-//               height: "420px",
-//               position: "relative",
-//             }}
-//           >
-//             <DualBlobOrbit />
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default About;
 import React from "react";
-
-const cardStyle: React.CSSProperties = {
-  backdropFilter: "blur(14px)",
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  borderRadius: "18px",
-  padding: "30px",
-  transition: "all 0.35s ease",
-  cursor: "pointer",
-};
+import useIsMobile from "../../hooks/useIsMobile";
 
 const About: React.FC = () => {
+  const isMobile = useIsMobile();
+
+  const cardStyle: React.CSSProperties = {
+    backdropFilter: "blur(14px)",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.08)",
+    borderRadius: "18px",
+    padding: isMobile ? "22px" : "30px",
+    transition: "all 0.35s ease",
+    cursor: "pointer",
+  };
+
   return (
-    <section id="about" style={{ padding: "var(--space-lg) 0", paddingTop: "120px" }}>
+    <section id="about" style={{ padding: "var(--space-lg) 0", paddingTop: isMobile ? "80px" : "120px" }}>
       <div className="container">
 
         {/* HERO SECTION */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))",
-            gap: "var(--space-lg)",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(300px,1fr))",
+            gap: isMobile ? "2rem" : "var(--space-lg)",
             alignItems: "center",
-            marginBottom: "120px"
+            marginBottom: isMobile ? "60px" : "120px",
           }}
         >
           {/* LEFT TEXT */}
           <div>
-            <h2 style={{ fontSize: "2.8rem", marginBottom: "20px" }}>
+            <h2 style={{ fontSize: isMobile ? "1.8rem" : "2.8rem", marginBottom: "20px" }}>
               Mission Control for your{" "}
               <span className="gradient-text">Business</span>
             </h2>
@@ -108,27 +49,29 @@ const About: React.FC = () => {
           {/* RIGHT LOGO */}
           <div
             style={{
-              height: "420px",
+              height: isMobile ? "auto" : "420px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <img
               src="/cocpit.png"
               alt="Cocpit"
               style={{
-                width: "420px",
+                width: "100%",
+                maxWidth: isMobile ? "280px" : "420px",
+                height: "auto",
                 animation: "float 4s ease-in-out infinite",
-                filter: "drop-shadow(0 0 30px rgba(255,255,255,0.12))"
+                filter: "drop-shadow(0 0 30px rgba(255,255,255,0.12))",
               }}
             />
           </div>
         </div>
 
         {/* WHAT WE DO */}
-        <div style={{ marginBottom: "100px" }}>
-          <h2 style={{ fontSize: "2.4rem", marginBottom: "20px" }}>
+        <div style={{ marginBottom: isMobile ? "60px" : "100px" }}>
+          <h2 style={{ fontSize: isMobile ? "1.5rem" : "2.4rem", marginBottom: "20px" }}>
             What We Do
           </h2>
 
@@ -142,8 +85,8 @@ const About: React.FC = () => {
         </div>
 
         {/* AI DIFFERENCE */}
-        <div style={{ marginBottom: "100px" }}>
-          <h2 style={{ fontSize: "2.4rem", marginBottom: "20px" }}>
+        <div style={{ marginBottom: isMobile ? "60px" : "100px" }}>
+          <h2 style={{ fontSize: isMobile ? "1.5rem" : "2.4rem", marginBottom: "20px" }}>
             The AI Difference
           </h2>
 
@@ -156,8 +99,8 @@ const About: React.FC = () => {
         </div>
 
         {/* VISION */}
-        <div style={{ marginBottom: "100px" }}>
-          <h2 style={{ fontSize: "2.4rem", marginBottom: "20px" }}>
+        <div style={{ marginBottom: isMobile ? "60px" : "100px" }}>
+          <h2 style={{ fontSize: isMobile ? "1.5rem" : "2.4rem", marginBottom: "20px" }}>
             Our Vision
           </h2>
 
@@ -169,28 +112,30 @@ const About: React.FC = () => {
         </div>
 
         {/* CONTACT GLASS CARDS */}
-        <div style={{ marginBottom: "120px" }}>
-          <h2 style={{ fontSize: "2.4rem", marginBottom: "40px" }}>
+        <div style={{ marginBottom: isMobile ? "60px" : "120px" }}>
+          <h2 style={{ fontSize: isMobile ? "1.5rem" : "2.4rem", marginBottom: "40px" }}>
             Get In Touch With Us
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-              gap: "30px"
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(260px,1fr))",
+              gap: isMobile ? "16px" : "30px",
             }}
           >
             {/* EMAIL */}
             <div
               style={cardStyle}
-              onMouseEnter={(e:any)=>{
-                e.currentTarget.style.transform="translateY(-10px)";
-                e.currentTarget.style.boxShadow="0 20px 60px rgba(255,255,255,0.08)";
+              onMouseEnter={(e: any) => {
+                if (!isMobile) {
+                  e.currentTarget.style.transform = "translateY(-10px)";
+                  e.currentTarget.style.boxShadow = "0 20px 60px rgba(255,255,255,0.08)";
+                }
               }}
-              onMouseLeave={(e:any)=>{
-                e.currentTarget.style.transform="translateY(0)";
-                e.currentTarget.style.boxShadow="none";
+              onMouseLeave={(e: any) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <h3>Email</h3>
@@ -202,19 +147,21 @@ const About: React.FC = () => {
             {/* LOCATION */}
             <div
               style={cardStyle}
-              onMouseEnter={(e:any)=>{
-                e.currentTarget.style.transform="translateY(-10px)";
-                e.currentTarget.style.boxShadow="0 20px 60px rgba(255,255,255,0.08)";
+              onMouseEnter={(e: any) => {
+                if (!isMobile) {
+                  e.currentTarget.style.transform = "translateY(-10px)";
+                  e.currentTarget.style.boxShadow = "0 20px 60px rgba(255,255,255,0.08)";
+                }
               }}
-              onMouseLeave={(e:any)=>{
-                e.currentTarget.style.transform="translateY(0)";
-                e.currentTarget.style.boxShadow="none";
+              onMouseLeave={(e: any) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <h3>Location</h3>
               <p style={{ color: "var(--text-secondary)" }}>
-                Office 504, Emerald Corner,<br/>
-                2nd Lane, Rajarampuri,<br/>
+                Office 504, Emerald Corner,<br />
+                2nd Lane, Rajarampuri,<br />
                 Kolhapur
               </p>
             </div>
@@ -222,18 +169,20 @@ const About: React.FC = () => {
             {/* WORKING HOURS */}
             <div
               style={cardStyle}
-              onMouseEnter={(e:any)=>{
-                e.currentTarget.style.transform="translateY(-10px)";
-                e.currentTarget.style.boxShadow="0 20px 60px rgba(255,255,255,0.08)";
+              onMouseEnter={(e: any) => {
+                if (!isMobile) {
+                  e.currentTarget.style.transform = "translateY(-10px)";
+                  e.currentTarget.style.boxShadow = "0 20px 60px rgba(255,255,255,0.08)";
+                }
               }}
-              onMouseLeave={(e:any)=>{
-                e.currentTarget.style.transform="translateY(0)";
-                e.currentTarget.style.boxShadow="none";
+              onMouseLeave={(e: any) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
               }}
             >
               <h3>Working Hours</h3>
               <p style={{ color: "var(--text-secondary)" }}>
-                Tuesday – Sunday<br/>
+                Tuesday – Sunday<br />
                 09:30 AM – 05:30 PM IST
               </p>
             </div>

@@ -1,4 +1,5 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 interface FAQItem {
   question: string;
@@ -14,7 +15,7 @@ const faqs: FAQItem[] = [
   {
     question: "Why do we need another professional network?",
     answer:
-      "You don’t. You need one that actually helps you build something instead of collecting followers, likes, and dead connections."
+      "You don't. You need one that actually helps you build something instead of collecting followers, likes, and dead connections."
   },
   {
     question: "How is Cocpit different from LinkedIn?",
@@ -24,12 +25,12 @@ const faqs: FAQItem[] = [
   {
     question: "What does the AI actually do?",
     answer:
-      "It doesn’t write cringe posts. It helps you match with the right people, structure ideas, identify gaps, and move faster—quietly, intelligently, and purposefully."
+      "It doesn't write cringe posts. It helps you match with the right people, structure ideas, identify gaps, and move faster—quietly, intelligently, and purposefully."
   },
   {
     question: "Who is Cocpit not for?",
     answer:
-      "If you’re here for clout, motivation quotes, or hustle culture, this isn’t for you. Cocpit is for builders, operators, and thinkers who want outcomes."
+      "If you're here for clout, motivation quotes, or hustle culture, this isn't for you. Cocpit is for builders, operators, and thinkers who want outcomes."
   },
   {
     question: "Is my data safe, or is this another data-mining platform?",
@@ -39,15 +40,15 @@ const faqs: FAQItem[] = [
   {
     question: "Why should I join before launch?",
     answer:
-      "Because platforms don’t reward late believers. Early users shape the system, influence features, and get access before the noise arrives."
+      "Because platforms don't reward late believers. Early users shape the system, influence features, and get access before the noise arrives."
   },
   {
     question: "Is Cocpit ready, or is this just hype?",
     answer:
-      "The system is being built deliberately. Pre-launch exists to onboard serious users, stress-test ideas, and eliminate everything that doesn’t create value."
+      "The system is being built deliberately. Pre-launch exists to onboard serious users, stress-test ideas, and eliminate everything that doesn't create value."
   },
   {
-    question: "What happens if I don’t join now?",
+    question: "What happens if I don't join now?",
     answer:
       "Nothing. Your idea might just end up where most do—forgotten, unfunded, and outpaced."
   }
@@ -55,6 +56,7 @@ const faqs: FAQItem[] = [
 
 const FAQs: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -64,7 +66,7 @@ const FAQs: React.FC = () => {
     <section
       id="faqs"
       style={{
-        padding: "120px 2rem",
+        padding: isMobile ? "80px 1rem" : "120px 2rem",
         color: "white",
         maxWidth: "900px",
         margin: "0 auto"
@@ -72,9 +74,9 @@ const FAQs: React.FC = () => {
     >
       <h2
         style={{
-          fontSize: "2.8rem",
+          fontSize: "clamp(1.6rem, 5vw, 2.8rem)",
           fontWeight: 700,
-          marginBottom: "3rem"
+          marginBottom: isMobile ? "2rem" : "3rem",
         }}
       >
         Frequently Asked Questions
@@ -87,9 +89,9 @@ const FAQs: React.FC = () => {
           <div
             key={index}
             style={{
-              marginBottom: "1.5rem",
+              marginBottom: isMobile ? "1rem" : "1.5rem",
               border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: "16px",
+              borderRadius: isMobile ? "12px" : "16px",
               background: "rgba(255,255,255,0.03)",
               backdropFilter: "blur(10px)"
             }}
@@ -101,11 +103,12 @@ const FAQs: React.FC = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                padding: "1.5rem",
-                cursor: "pointer"
+                padding: isMobile ? "1rem" : "1.5rem",
+                cursor: "pointer",
+                gap: "1rem",
               }}
             >
-              <span style={{ fontSize: "1.1rem", fontWeight: 500 }}>
+              <span style={{ fontSize: isMobile ? "0.95rem" : "1.1rem", fontWeight: 500 }}>
                 {faq.question}
               </span>
 
@@ -113,7 +116,8 @@ const FAQs: React.FC = () => {
                 style={{
                   fontSize: "1.5rem",
                   transition: "transform 0.3s ease",
-                  transform: isOpen ? "rotate(45deg)" : "rotate(0deg)"
+                  transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                  flexShrink: 0,
                 }}
               >
                 +
@@ -123,17 +127,21 @@ const FAQs: React.FC = () => {
             {/* ANSWER */}
             <div
               style={{
-                maxHeight: isOpen ? "200px" : "0px",
+                maxHeight: isOpen ? "300px" : "0px",
                 overflow: "hidden",
                 transition: "all 0.4s ease",
-                padding: isOpen ? "0 1.5rem 1.5rem" : "0 1.5rem"
+                padding: isOpen
+                  ? (isMobile ? "0 1rem 1rem" : "0 1.5rem 1.5rem")
+                  : (isMobile ? "0 1rem" : "0 1.5rem"),
               }}
             >
               <p
                 style={{
                   margin: 0,
                   opacity: isOpen ? 1 : 0,
-                  transition: "opacity 0.3s ease"
+                  transition: "opacity 0.3s ease",
+                  fontSize: isMobile ? "0.9rem" : undefined,
+                  lineHeight: "1.7",
                 }}
               >
                 {faq.answer}

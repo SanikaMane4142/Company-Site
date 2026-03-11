@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import useIsMobile from "../hooks/useIsMobile";
 
 interface Member {
   name: string;
@@ -24,7 +25,7 @@ const members: Member[] = [
   {
     name: "AI Lead Name",
     role: "Head of AI",
-    bio: "Designing ML models powering Cocpit’s intelligent core.",
+    bio: "Designing ML models powering Cocpit's intelligent core.",
     image: "https://via.placeholder.com/300"
   },
   {
@@ -50,6 +51,7 @@ const members: Member[] = [
 const Team: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [selected, setSelected] = useState<Member | null>(null);
+  const isMobile = useIsMobile();
 
   // Neural Background
   useEffect(() => {
@@ -58,7 +60,8 @@ const Team: React.FC = () => {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    const nodes = Array.from({ length: 70 }).map(() => ({
+    const nodeCount = isMobile ? 30 : 70;
+    const nodes = Array.from({ length: nodeCount }).map(() => ({
       x: Math.random() * width,
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 0.5,
@@ -114,7 +117,7 @@ const Team: React.FC = () => {
         color: "#fff",
         position: "relative",
         overflow: "hidden",
-        padding: "120px 2rem"
+        padding: isMobile ? "80px 1rem" : "120px 2rem",
       }}
     >
       {/* Neural Canvas */}
@@ -124,75 +127,77 @@ const Team: React.FC = () => {
       />
 
       <div style={{ position: "relative", zIndex: 2 }}>
-      
+
         <motion.h1
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            style={{
-                textAlign: "center",
-                fontSize: "4rem",
-                fontWeight: 700,
-                marginBottom: "5rem",
-                fontFamily: "'Space Grotesk', sans-serif",
-                background: "linear-gradient(90deg, #7c9cff, #b993ff, #7c9cff)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                animation: "gradientShift 6s linear infinite",
-                letterSpacing: "-0.04em"
-             }}
->
-  Meet The Core Team
-</motion.h1>
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          style={{
+            textAlign: "center",
+            fontSize: "clamp(2rem, 6vw, 4rem)",
+            fontWeight: 700,
+            marginBottom: isMobile ? "2.5rem" : "5rem",
+            fontFamily: "'Space Grotesk', sans-serif",
+            background: "linear-gradient(90deg, #7c9cff, #b993ff, #7c9cff)",
+            backgroundSize: "200% auto",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            animation: "gradientShift 6s linear infinite",
+            letterSpacing: "-0.04em",
+          }}
+        >
+          Meet The Core Team
+        </motion.h1>
 
         <div
           style={{
             maxWidth: "1100px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "2.5rem"
+            gridTemplateColumns: isMobile
+              ? "repeat(2, 1fr)"
+              : "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: isMobile ? "1rem" : "2.5rem",
           }}
         >
           {members.map((member, i) => (
             <motion.div
               key={i}
-              whileHover={{
+              whileHover={isMobile ? {} : {
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(120,150,255,0.4)"
               }}
               onClick={() => setSelected(member)}
               style={{
                 cursor: "pointer",
-                padding: "2rem",
-                borderRadius: "24px",
+                padding: isMobile ? "1.2rem" : "2rem",
+                borderRadius: isMobile ? "16px" : "24px",
                 background: "rgba(255,255,255,0.05)",
                 border: "1px solid rgba(255,255,255,0.1)",
                 backdropFilter: "blur(15px)",
-                textAlign: "center"
+                textAlign: "center",
               }}
             >
               <img
                 src={member.image}
                 alt={member.name}
                 style={{
-                  width: "120px",
-                  height: "120px",
+                  width: isMobile ? "80px" : "120px",
+                  height: isMobile ? "80px" : "120px",
                   borderRadius: "50%",
                   objectFit: "cover",
-                  marginBottom: "1.5rem",
-                  border: "2px solid rgba(120,150,255,0.5)"
+                  marginBottom: isMobile ? "0.8rem" : "1.5rem",
+                  border: "2px solid rgba(120,150,255,0.5)",
                 }}
               />
-              <h3>{member.name}</h3>
-              <p style={{ opacity: 0.6 }}>{member.role}</p>
+              <h3 style={{ fontSize: isMobile ? "0.95rem" : undefined }}>{member.name}</h3>
+              <p style={{ opacity: 0.6, fontSize: isMobile ? "0.8rem" : undefined }}>{member.role}</p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* PERFECT CENTER MODAL */}
+      {/* MODAL */}
       <AnimatePresence>
         {selected && (
           <>
@@ -207,7 +212,7 @@ const Team: React.FC = () => {
                 position: "fixed",
                 inset: 0,
                 background: "#000",
-                zIndex: 50
+                zIndex: 50,
               }}
             />
 
@@ -219,7 +224,8 @@ const Team: React.FC = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                zIndex: 60
+                zIndex: 60,
+                padding: isMobile ? "1rem" : undefined,
               }}
             >
               <motion.div
@@ -231,33 +237,33 @@ const Team: React.FC = () => {
                   background:
                     "linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
                   border: "1px solid rgba(255,255,255,0.15)",
-                  borderRadius: "28px",
-                  padding: "3rem",
+                  borderRadius: isMobile ? "20px" : "28px",
+                  padding: isMobile ? "2rem" : "3rem",
                   width: "90%",
                   maxWidth: "500px",
                   backdropFilter: "blur(30px)",
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
               >
                 <img
                   src={selected.image}
                   alt={selected.name}
                   style={{
-                    width: "140px",
-                    height: "140px",
+                    width: isMobile ? "100px" : "140px",
+                    height: isMobile ? "100px" : "140px",
                     borderRadius: "50%",
                     objectFit: "cover",
                     marginBottom: "1.5rem",
-                    border: "2px solid rgba(120,150,255,0.6)"
+                    border: "2px solid rgba(120,150,255,0.6)",
                   }}
                 />
 
-                <h2>{selected.name}</h2>
-                <p style={{ opacity: 0.6, marginBottom: "1.5rem" }}>
+                <h2 style={{ fontSize: isMobile ? "1.3rem" : undefined }}>{selected.name}</h2>
+                <p style={{ opacity: 0.6, marginBottom: "1.5rem", fontSize: isMobile ? "0.9rem" : undefined }}>
                   {selected.role}
                 </p>
 
-                <p style={{ lineHeight: "1.7", opacity: 0.85 }}>
+                <p style={{ lineHeight: "1.7", opacity: 0.85, fontSize: isMobile ? "0.9rem" : undefined }}>
                   {selected.bio}
                 </p>
 
@@ -270,7 +276,8 @@ const Team: React.FC = () => {
                     border: "1px solid rgba(120,150,255,0.5)",
                     background: "rgba(120,150,255,0.15)",
                     color: "#fff",
-                    cursor: "pointer"
+                    cursor: "pointer",
+                    width: isMobile ? "100%" : undefined,
                   }}
                 >
                   Close

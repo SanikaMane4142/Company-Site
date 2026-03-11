@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import Card from '../ui/Card';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const Waitlist: React.FC = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const isMobile = useIsMobile();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -13,7 +15,7 @@ const Waitlist: React.FC = () => {
         if (!email) return;
 
         try {
-            const response = await fetch('http://localhost:5000/api/waitlist', {
+            const response = await fetch('/api/waitlist', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,20 +35,38 @@ const Waitlist: React.FC = () => {
     };
 
     return (
-        <section style={{ padding: 'var(--space-lg) 0' }}>
+        <section style={{ padding: isMobile ? 'var(--space-md) 0' : 'var(--space-lg) 0' }}>
             <div className="container">
-                <Card style={{ textAlign: 'center', padding: 'var(--space-lg)', maxWidth: '800px', margin: '0 auto' }}>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+                <Card
+                    style={{
+                        textAlign: 'center',
+                        padding: isMobile ? 'var(--space-md)' : 'var(--space-lg)',
+                        maxWidth: '800px',
+                        margin: '0 auto',
+                    }}
+                >
+                    <h2 style={{ fontSize: isMobile ? '1.6rem' : '2.5rem', marginBottom: '1rem' }}>
                         Join the <span className="gradient-text">Waitlist</span>
                     </h2>
 
-                    <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-md)' }}>
+                    <p style={{
+                        color: 'var(--text-secondary)',
+                        marginBottom: 'var(--space-md)',
+                        fontSize: isMobile ? '0.9rem' : undefined,
+                        padding: isMobile ? '0 0.5rem' : undefined,
+                    }}>
                         Be the first to experience the future of digital navigation. Limited spots available for the beta release.
                     </p>
 
-                    <form 
+                    <form
                         onSubmit={handleSubmit}
-                        style={{ display: 'flex', gap: '0.5rem', maxWidth: '500px', margin: '0 auto' }}
+                        style={{
+                            display: 'flex',
+                            flexDirection: isMobile ? 'column' : 'row',
+                            gap: '0.5rem',
+                            maxWidth: '500px',
+                            margin: '0 auto',
+                        }}
                     >
                         <Input
                             placeholder="Enter your email"
@@ -57,7 +77,16 @@ const Waitlist: React.FC = () => {
                             }
                         />
 
-                        <Button variant="primary" type="submit"style={{ height: '40px', padding: '0 16px' }}>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            style={{
+                                height: '40px',
+                                padding: '0 16px',
+                                width: isMobile ? '100%' : undefined,
+                                flexShrink: 0,
+                            }}
+                        >
                             Join Now
                         </Button>
                     </form>
@@ -69,6 +98,9 @@ const Waitlist: React.FC = () => {
                     )}
                 </Card>
             </div>
+            <section id="waitlist">
+  {/* Your waitlist content */}
+</section>
         </section>
     );
 };
