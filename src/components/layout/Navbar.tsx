@@ -9,35 +9,25 @@ const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useIsMobile();
 
+  // Hide/show badge on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-
-      if (currentScroll > lastScrollY && currentScroll > 80) {
-        setShowBadge(false);
-      } else {
-        setShowBadge(true);
-      }
-
+      setShowBadge(!(currentScroll > lastScrollY && currentScroll > 80));
       setLastScrollY(currentScroll);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Close mobile menu on route change or resize to desktop
+  // Close mobile menu on resize
   useEffect(() => {
     if (!isMobile) setMenuOpen(false);
   }, [isMobile]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -57,9 +47,7 @@ const Navbar: React.FC = () => {
     letterSpacing: "-0.01em",
   };
 
-  const handleLinkClick = () => {
-    setMenuOpen(false);
-  };
+  const handleLinkClick = () => setMenuOpen(false);
 
   return (
     <>
@@ -115,9 +103,6 @@ const Navbar: React.FC = () => {
             <Link to="/careers" style={navLinkStyle}>
               Careers
             </Link>
-            <Link to="/team" style={navLinkStyle}>
-              Team
-            </Link>
             <Button variant="primary" size="sm">
               Get Access
             </Button>
@@ -153,9 +138,7 @@ const Navbar: React.FC = () => {
                 background: "white",
                 borderRadius: "2px",
                 transition: "all 0.3s ease",
-                transform: menuOpen
-                  ? "rotate(45deg) translate(4px, 4px)"
-                  : "none",
+                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
               }}
             />
             <span
@@ -177,9 +160,7 @@ const Navbar: React.FC = () => {
                 background: "white",
                 borderRadius: "2px",
                 transition: "all 0.3s ease",
-                transform: menuOpen
-                  ? "rotate(-45deg) translate(4px, -4px)"
-                  : "none",
+                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
               }}
             />
           </button>
@@ -218,9 +199,6 @@ const Navbar: React.FC = () => {
           <Link to="/careers" style={mobileLinkStyle} onClick={handleLinkClick}>
             Careers
           </Link>
-          <Link to="/team" style={mobileLinkStyle} onClick={handleLinkClick}>
-            Team
-          </Link>
           <div style={{ marginTop: "1rem" }}>
             <Button variant="primary" size="md" onClick={handleLinkClick}>
               Get Access
@@ -229,7 +207,7 @@ const Navbar: React.FC = () => {
         </div>
       )}
 
-      {/* FLOATING POWERED BY BADGE (hidden on mobile via CSS) */}
+      {/* FLOATING POWERED BY BADGE */}
       {!isMobile && (
         <div
           style={{
@@ -264,7 +242,6 @@ const Navbar: React.FC = () => {
                 objectFit: "contain",
               }}
             />
-
             <span
               style={{
                 fontSize: "0.95rem",

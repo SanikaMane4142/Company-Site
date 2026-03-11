@@ -61,18 +61,12 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/about">About</Link>
               </li>
-
               <li>
                 <Link to="/careers">Careers</Link>
               </li>
-
               {/* Contact will open About page */}
               <li>
                 <Link to="/about">Contact</Link>
-              </li>
-
-              <li>
-                <Link to="/team">Team</Link>
               </li>
             </ul>
           </div>
@@ -90,14 +84,11 @@ const Footer: React.FC = () => {
                 gap: "0.5rem",
               }}
             >
-              {/* No redirect */}
               <li>
                 <a href="#" onClick={(e) => e.preventDefault()}>
                   Privacy Policy
                 </a>
               </li>
-
-              {/* No redirect */}
               <li>
                 <a href="#" onClick={(e) => e.preventDefault()}>
                   Terms of Service

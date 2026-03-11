@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useIsMobile from "../hooks/useIsMobile";
+import GlobalParticles from "../components/layout/GlobalParticles";
 
 interface Role {
   title: string;
@@ -36,7 +37,7 @@ Required Skills:
 Preferred Skills:
 • Startup experience
 • Cloud knowledge (AWS / GCP / Azure)
-`
+`,
   },
   {
     title: "Android Developer (Flutter)",
@@ -61,7 +62,7 @@ Required Skills:
 Preferred Skills:
 • Google Play publishing
 • Scalable architecture knowledge
-`
+`,
   },
   {
     title: "iOS Developer (Swift)",
@@ -86,7 +87,7 @@ Required Skills:
 Preferred Skills:
 • App Store deployment
 • Mobile security practices
-`
+`,
   },
   {
     title: "AI / ML Developer",
@@ -111,7 +112,7 @@ Required Skills:
 Preferred Skills:
 • LLM experience
 • Data engineering knowledge
-`
+`,
   },
   {
     title: "HR Manager",
@@ -136,12 +137,11 @@ Required Skills:
 Preferred Skills:
 • Tech startup experience
 • Engineer talent acquisition knowledge
-`
-  }
+`,
+  },
 ];
 
 const Careers: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [submittingRole, setSubmittingRole] = useState<string | null>(null);
   const isMobile = useIsMobile();
@@ -157,14 +157,11 @@ const Careers: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const validateEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const submitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validation
     const curErrors: { [key: string]: string } = {};
     if (!name.trim()) curErrors.name = "Name is required";
     if (!email.trim()) {
@@ -192,7 +189,7 @@ const Careers: React.FC = () => {
     try {
       const response = await fetch("/api/apply", {
         method: "POST",
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
@@ -200,7 +197,6 @@ const Careers: React.FC = () => {
       if (response.ok) {
         alert("Application submitted successfully!");
         setShowModal(false);
-        // Reset form
         setName("");
         setEmail("");
         setMessage("");
@@ -222,78 +218,39 @@ const Careers: React.FC = () => {
     setShowModal(true);
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const nodes = Array.from({ length: isMobile ? 25 : 50 }).map(() => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      pulse: Math.random() * 100
-    }));
-
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-
-      nodes.forEach((node) => {
-        node.x += node.vx;
-        node.y += node.vy;
-
-        if (node.x < 0 || node.x > width) node.vx *= -1;
-        if (node.y < 0 || node.y > height) node.vy *= -1;
-
-        node.pulse += 0.05;
-        const glow = (Math.sin(node.pulse) + 1) / 2;
-
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, 2 + glow * 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(120,150,255,${0.6 + glow * 0.4})`;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  }, []);
-
   return (
-    <div style={{ minHeight: "100vh", background: "#050505", color: "#fff", position: "relative", overflow: "hidden", paddingTop: isMobile ? "70px" : "100px" }}>
-
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: "none"
-        }}
-      />
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#050505",
+        color: "#fff",
+        position: "relative",
+        overflow: "hidden",
+        paddingTop: isMobile ? "70px" : "100px",
+      }}
+    >
+      {/* Global Particles Background */}
+      <GlobalParticles />
 
       <div style={{ position: "relative", zIndex: 2 }}>
-
-        <section style={{
-          height: isMobile ? "auto" : "80vh",
-          minHeight: isMobile ? "50vh" : undefined,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          padding: isMobile ? "3rem 1.5rem" : undefined,
-        }}>
+        {/* Hero Section */}
+        <section
+          style={{
+            height: isMobile ? "auto" : "80vh",
+            minHeight: isMobile ? "50vh" : undefined,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            padding: isMobile ? "3rem 1.5rem" : undefined,
+          }}
+        >
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            style={{
-              fontSize: "clamp(2rem, 6vw, 4rem)",
-              fontWeight: 600,
-            }}
+            style={{ fontSize: "clamp(2rem, 6vw, 4rem)", fontWeight: 600 }}
           >
             Join The Execution Layer
           </motion.h1>
@@ -302,22 +259,25 @@ const Careers: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.7 }}
             transition={{ delay: 0.4 }}
-            style={{
-              fontSize: isMobile ? "0.95rem" : undefined,
-              padding: isMobile ? "0 1rem" : undefined,
-            }}
+            style={{ fontSize: isMobile ? "0.95rem" : undefined, padding: isMobile ? "0 1rem" : undefined }}
           >
             Help build the intelligent infrastructure powering Cocpit.
           </motion.p>
         </section>
 
+        {/* Roles Section */}
         <section style={{ padding: isMobile ? "2rem 1rem" : "4rem 2rem" }}>
-          <div style={{ maxWidth: "900px", margin: "0 auto", display: "flex", flexDirection: "column", gap: isMobile ? "1.2rem" : "2rem" }}>
-
+          <div
+            style={{
+              maxWidth: "900px",
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: isMobile ? "1.2rem" : "2rem",
+            }}
+          >
             {roles.map((role, index) => (
-
               <div key={index}>
-
                 <motion.div
                   whileHover={isMobile ? {} : { scale: 1.03 }}
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -326,37 +286,31 @@ const Careers: React.FC = () => {
                     borderRadius: isMobile ? "14px" : "20px",
                     cursor: "pointer",
                     background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.1)"
+                    border: "1px solid rgba(255,255,255,0.1)",
                   }}
                 >
-
                   <h3 style={{ fontSize: isMobile ? "1.1rem" : undefined }}>{role.title}</h3>
-
                   <p style={{ opacity: 0.6, fontSize: isMobile ? "0.85rem" : undefined }}>
                     {role.location} · {role.type}
                   </p>
-
                 </motion.div>
 
                 <AnimatePresence>
-
                   {openIndex === index && (
-
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       style={{ overflowX: "hidden", marginTop: "1.2rem" }}
                     >
-
-                      <div style={{
-                        padding: isMobile ? "1.5rem" : "3rem",
-                        lineHeight: "1.9",
-                        fontSize: isMobile ? "0.9rem" : undefined,
-                      }}>
-
+                      <div
+                        style={{
+                          padding: isMobile ? "1.5rem" : "3rem",
+                          lineHeight: "1.9",
+                          fontSize: isMobile ? "0.9rem" : undefined,
+                        }}
+                      >
                         <div dangerouslySetInnerHTML={{ __html: role.description.replace(/\n/g, "<br/>") }} />
-
                         <div style={{ marginTop: "2rem" }}>
                           <motion.button
                             whileHover={{ scale: submittingRole ? 1 : 1.05 }}
@@ -366,9 +320,7 @@ const Careers: React.FC = () => {
                               padding: isMobile ? "0.8rem 1.8rem" : "1rem 2.4rem",
                               borderRadius: "14px",
                               border: "1px solid rgba(120,150,255,0.6)",
-                              background: submittingRole
-                                ? "rgba(120,150,255,0.05)"
-                                : "rgba(120,150,255,0.15)",
+                              background: submittingRole ? "rgba(120,150,255,0.05)" : "rgba(120,150,255,0.15)",
                               color: "#fff",
                               fontWeight: 600,
                               letterSpacing: "0.05em",
@@ -380,25 +332,18 @@ const Careers: React.FC = () => {
                           >
                             {submittingRole === role.title ? "Submitting..." : "Apply Now"}
                           </motion.button>
-
                         </div>
-
                       </div>
-
                     </motion.div>
-
                   )}
-
                 </AnimatePresence>
-
               </div>
-
             ))}
-
           </div>
         </section>
       </div>
 
+      {/* Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -431,7 +376,7 @@ const Careers: React.FC = () => {
                 maxHeight: isMobile ? "90vh" : undefined,
                 overflowY: isMobile ? "auto" : undefined,
                 border: "1px solid rgba(255,255,255,0.1)",
-                position: "relative"
+                position: "relative",
               }}
             >
               <button
@@ -445,52 +390,88 @@ const Careers: React.FC = () => {
                   color: "#fff",
                   fontSize: "24px",
                   cursor: "pointer",
-                  opacity: 0.5
+                  opacity: 0.5,
                 }}
               >
                 &times;
               </button>
 
-              <h2 style={{ marginBottom: "20px", fontSize: isMobile ? "1.2rem" : "1.5rem" }}>Apply for {selectedRole}</h2>
+              <h2 style={{ marginBottom: "20px", fontSize: isMobile ? "1.2rem" : "1.5rem" }}>
+                Apply for {selectedRole}
+              </h2>
 
               <form onSubmit={submitApplication} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                 <div>
-                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>Full Name *</label>
+                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>
+                    Full Name *
+                  </label>
                   <input
                     placeholder="Your Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     disabled={isSubmitting}
-                    style={{ width: "100%", padding: "12px", background: "rgba(255,255,255,0.05)", border: errors.name ? "1px solid #ff4444" : "1px solid rgba(255,255,255,0.1)", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "16px" : undefined }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: errors.name ? "1px solid #ff4444" : "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: "10px",
+                      color: "#fff",
+                      fontSize: isMobile ? "16px" : undefined,
+                    }}
                   />
                   {errors.name && <p style={{ color: "#ff4444", fontSize: "0.75rem", marginTop: "4px" }}>{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>Email Address *</label>
+                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>
+                    Email Address *
+                  </label>
                   <input
                     placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isSubmitting}
-                    style={{ width: "100%", padding: "12px", background: "rgba(255,255,255,0.05)", border: errors.email ? "1px solid #ff4444" : "1px solid rgba(255,255,255,0.1)", borderRadius: "10px", color: "#fff", fontSize: isMobile ? "16px" : undefined }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: errors.email ? "1px solid #ff4444" : "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: "10px",
+                      color: "#fff",
+                      fontSize: isMobile ? "16px" : undefined,
+                    }}
                   />
                   {errors.email && <p style={{ color: "#ff4444", fontSize: "0.75rem", marginTop: "4px" }}>{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>Message (Optional)</label>
+                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>
+                    Message (Optional)
+                  </label>
                   <textarea
                     placeholder="Why do you want to join?"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     disabled={isSubmitting}
-                    style={{ width: "100%", padding: "12px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "10px", color: "#fff", minHeight: "80px", resize: "none", fontSize: isMobile ? "16px" : undefined }}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: "10px",
+                      color: "#fff",
+                      minHeight: "80px",
+                      resize: "none",
+                      fontSize: isMobile ? "16px" : undefined,
+                    }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>Resume Upload *</label>
+                  <label style={{ fontSize: "0.8rem", opacity: 0.6, display: "block", marginBottom: "5px" }}>
+                    Resume Upload *
+                  </label>
                   <div style={{ position: "relative" }}>
                     <input
                       type="file"
@@ -501,17 +482,19 @@ const Careers: React.FC = () => {
                         position: "absolute",
                         inset: 0,
                         cursor: "pointer",
-                        zIndex: 2
+                        zIndex: 2,
                       }}
                     />
-                    <div style={{
-                      padding: "12px",
-                      background: "rgba(255,255,255,0.05)",
-                      border: errors.resume ? "1px dashed #ff4444" : "1px dashed rgba(255,255,255,0.3)",
-                      borderRadius: "10px",
-                      textAlign: "center",
-                      color: resume ? "#7896ff" : "rgba(255,255,255,0.5)"
-                    }}>
+                    <div
+                      style={{
+                        padding: "12px",
+                        background: "rgba(255,255,255,0.05)",
+                        border: errors.resume ? "1px dashed #ff4444" : "1px dashed rgba(255,255,255,0.3)",
+                        borderRadius: "10px",
+                        textAlign: "center",
+                        color: resume ? "#7896ff" : "rgba(255,255,255,0.5)",
+                      }}
+                    >
                       {resume ? resume.name : "Select PDF/DOC"}
                     </div>
                   </div>
@@ -541,17 +524,22 @@ const Careers: React.FC = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="spinner" style={{
-                        width: "18px",
-                        height: "18px",
-                        border: "2px solid rgba(0,0,0,0.2)",
-                        borderTop: "2px solid #000",
-                        borderRadius: "50%",
-                        animation: "spin 0.8s linear infinite"
-                      }} />
+                      <div
+                        className="spinner"
+                        style={{
+                          width: "18px",
+                          height: "18px",
+                          border: "2px solid rgba(0,0,0,0.2)",
+                          borderTop: "2px solid #000",
+                          borderRadius: "50%",
+                          animation: "spin 0.8s linear infinite",
+                        }}
+                      />
                       Submitting...
                     </>
-                  ) : "Submit Application"}
+                  ) : (
+                    "Submit Application"
+                  )}
                 </button>
               </form>
 
@@ -564,7 +552,6 @@ const Careers: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 };
