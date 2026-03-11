@@ -9,7 +9,6 @@ const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = useIsMobile();
 
-  // Hide/show badge on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -20,12 +19,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Close mobile menu on resize
   useEffect(() => {
     if (!isMobile) setMenuOpen(false);
   }, [isMobile]);
 
-  // Lock body scroll when menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -49,9 +46,13 @@ const Navbar: React.FC = () => {
 
   const handleLinkClick = () => setMenuOpen(false);
 
+  const scrollToWaitlist = () => {
+    const el = document.getElementById("waitlist");
+    el?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      {/* NAVBAR */}
       <nav
         className="glass"
         style={{
@@ -67,7 +68,6 @@ const Navbar: React.FC = () => {
           backdropFilter: "blur(20px)",
         }}
       >
-        {/* LOGO */}
         <Link
           to="/"
           onClick={handleLinkClick}
@@ -82,7 +82,6 @@ const Navbar: React.FC = () => {
           COC<span className="gradient-text">PIT</span>
         </Link>
 
-        {/* DESKTOP NAV LINKS */}
         {!isMobile && (
           <div
             style={{
@@ -103,13 +102,12 @@ const Navbar: React.FC = () => {
             <Link to="/careers" style={navLinkStyle}>
               Careers
             </Link>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" onClick={scrollToWaitlist}>
               Get Access
             </Button>
           </div>
         )}
 
-        {/* HAMBURGER BUTTON (MOBILE) */}
         {isMobile && (
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -167,7 +165,6 @@ const Navbar: React.FC = () => {
         )}
       </nav>
 
-      {/* MOBILE MENU OVERLAY */}
       {isMobile && (
         <div
           style={{
@@ -200,14 +197,20 @@ const Navbar: React.FC = () => {
             Careers
           </Link>
           <div style={{ marginTop: "1rem" }}>
-            <Button variant="primary" size="md" onClick={handleLinkClick}>
+            <Button
+              variant="primary"
+              size="md"
+              onClick={() => {
+                handleLinkClick();
+                scrollToWaitlist();
+              }}
+            >
               Get Access
             </Button>
           </div>
         </div>
       )}
 
-      {/* FLOATING POWERED BY BADGE */}
       {!isMobile && (
         <div
           style={{

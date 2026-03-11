@@ -98,6 +98,9 @@ const Waitlist: React.FC = () => {
                     )}
                 </Card>
             </div>
+            <section id="waitlist">
+  {/* Your waitlist content */}
+</section>
         </section>
     );
 };
