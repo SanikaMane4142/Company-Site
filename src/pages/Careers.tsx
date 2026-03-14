@@ -16,77 +16,88 @@ const roles: Role[] = [
     location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
     type: "Full-Time",
     description: `
+Company: Cocpit
+
 Role Overview:
-We are looking for a skilled Full Stack Web Developer to build and maintain scalable web applications for Cocpit.
+We are looking for a skilled Full Stack Web Developer to build and maintain scalable web applications for Cocpit’s platform.
 
 Key Responsibilities:
-• Develop and maintain scalable web applications using React.js
-• Build backend services and APIs using Express.js and Node.js
-• Integrate databases, authentication systems, and third-party APIs
-• Work closely with UI/UX designers
-• Optimize applications for performance, scalability, and security
-• Collaborate with the AI team
+• Develop and maintain scalable web applications
+• Build backend APIs and services
+• Collaborate with UI/UX designers and AI engineers
+• Optimize performance and scalability of the platform
+• Maintain clean, efficient, and well-documented code
 
-Required Skills:
-• Strong experience with React.js
-• Experience with Node.js and Express.js
-• Knowledge of REST APIs
-• Git and version control
-• MongoDB / SQL knowledge
+Requirements:
+• Minimum 3 years of experience in web development
+• Strong proficiency in React.js and Next.js
+• Strong backend experience with Node.js and Express.js
+• Experience working with PostgreSQL
+• Experience building and integrating REST APIs
+• Strong understanding of Git and version control
+• Understanding of authentication systems and API security
+• Experience working in Agile or startup environments
 
 Preferred Skills:
-• Startup experience
-• Cloud knowledge (AWS / GCP / Azure)
+• Docker
+• Kubernetes
+• CI/CD pipelines
+• GitHub Actions
+• Grafana
+• Python scripting
+• DevOps and cloud infrastructure knowledge
 `,
   },
   {
-    title: "Android Developer (Flutter)",
+    title: "Android Developer",
     location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
     type: "Full-Time",
     description: `
+Company: Cocpit
+
 Role Overview:
-Design and develop high-performance mobile applications using Flutter.
+Cocpit is looking for an experienced Android Developer to develop and maintain high-performance mobile applications.
 
 Key Responsibilities:
 • Develop Android applications using Flutter
-• Integrate Express.js APIs
-• Ensure performance and responsiveness
-• Collaborate with UI/UX designers
+• Integrate mobile apps with backend APIs built using Node.js and Express.js
+• Collaborate with UI/UX designers to implement intuitive mobile interfaces
+• Debug, test, and optimize applications across devices
+• Ensure performance, scalability, and reliability of the mobile application
 
-Required Skills:
-• Strong Flutter experience
-• REST API integration
-• Mobile UI/UX knowledge
-• Git experience
-
-Preferred Skills:
-• Google Play publishing
-• Scalable architecture knowledge
+Requirements:
+• Minimum 3 years of experience in Android or cross-platform mobile development
+• Strong experience with Flutter
+• Experience integrating REST APIs
+• Knowledge of Git version control
+• Understanding of mobile UI/UX best practices
+• Experience with mobile debugging and performance optimization
 `,
   },
   {
-    title: "iOS Developer (Swift)",
+    title: "iOS Developer",
     location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
     type: "Full-Time",
     description: `
+Company: Cocpit
+
 Role Overview:
-Build scalable and high-quality iOS applications.
+We are seeking a skilled iOS Developer to design and develop scalable and high-quality iOS applications for Cocpit.
 
 Key Responsibilities:
 • Develop iOS applications using Swift
-• Integrate backend services
-• Implement smooth UI
-• Maintain performance optimization
+• Integrate backend APIs developed using Node.js and Express.js
+• Work closely with UI/UX designers and backend developers
+• Ensure application performance, responsiveness, and stability
+• Debug and resolve application issues across Apple devices
 
-Required Skills:
-• Strong Swift experience
-• iOS SDK knowledge
-• REST API integration
-• Git knowledge
-
-Preferred Skills:
-• App Store deployment
-• Mobile security practices
+Requirements:
+• Minimum 3 years of experience in iOS development
+• Strong experience with Swift
+• Experience integrating REST APIs
+• Familiarity with Apple SDKs and frameworks
+• Knowledge of Git and collaborative development workflows
+• Experience deploying applications to the Apple App Store
 `,
   },
   {
@@ -94,24 +105,24 @@ Preferred Skills:
     location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
     type: "Full-Time",
     description: `
+Company: Cocpit
+
 Role Overview:
-Design and implement intelligent systems.
+Cocpit is seeking an AI/ML Developer to build and deploy intelligent systems that power Cocpit’s AI infrastructure and analytics model.
 
 Key Responsibilities:
-• Design and deploy ML models
-• Integrate models into APIs
-• Optimize model performance
-• Develop data pipelines
+• Design and develop machine learning models
+• Build intelligent systems powering Cocpit’s AI features
+• Integrate AI models with Node.js / Express.js APIs
+• Train, evaluate, and optimize ML models
+• Work with datasets and build scalable data pipelines
 
-Required Skills:
-• Strong Python knowledge
-• TensorFlow / PyTorch
-• ML & Deep Learning concepts
-• Production deployment experience
-
-Preferred Skills:
-• LLM experience
-• Data engineering knowledge
+Requirements:
+• Minimum 3 years of experience in AI/ML development
+• Strong proficiency in Python
+• Experience with TensorFlow, PyTorch, or similar frameworks
+• Experience deploying ML models into production systems
+• Knowledge of data pipelines and model optimization
 `,
   },
   {
@@ -119,24 +130,25 @@ Preferred Skills:
     location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
     type: "Full-Time",
     description: `
+Company: Cocpit
+
 Role Overview:
-Manage recruitment and HR operations.
+Cocpit is looking for an HR Manager to handle recruitment, employee engagement, and HR operations while supporting the hiring needs of a growing tech startup.
 
 Key Responsibilities:
-• Manage end-to-end recruitment
-• Conduct HR interviews
-• Manage onboarding and HR policies
-• Handle performance management
+• Manage end-to-end recruitment processes
+• Conduct HR screening interviews for candidates
+• Coordinate with founders and technical teams during hiring
+• Handle employee onboarding and documentation
+• Maintain HR policies and company culture
+• Manage employee relations and HR compliance
 
-Required Skills:
-• Strong HR process knowledge
-• Experience hiring technical roles
-• Strong communication skills
-• HR tools knowledge
-
-Preferred Skills:
-• Tech startup experience
-• Engineer talent acquisition knowledge
+Requirements:
+• Minimum 3 years of experience in HR management
+• Experience hiring technical roles such as developers and engineers
+• Strong communication and interpersonal skills
+• Understanding of technical terminology in software development
+• Experience with HR tools and recruitment platforms
 `,
   },
 ];
