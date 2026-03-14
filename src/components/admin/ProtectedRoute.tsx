@@ -5,7 +5,7 @@ const ProtectedRoute: React.FC = () => {
   const adminToken = localStorage.getItem("adminToken");
 
   if (!adminToken) {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <Outlet />;

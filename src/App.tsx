@@ -37,10 +37,11 @@ function App() {
           <Route path="/team" element={<Team />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           
           <Route element={<ProtectedRoute />}>
             <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/applications/:roleName" element={<AdminApplications />} />
             </Route>
