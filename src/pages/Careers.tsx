@@ -12,147 +12,79 @@ interface Role {
 
 const roles: Role[] = [
   {
-    title: "Full Stack Web Developer",
-    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
-    type: "Full-Time",
+    title: "Marketing Intern",
+    location: "Kolhapur, Maharashtra (On-site)",
+    type: "Internship",
     description: `
-Company: Cocpit
-
 Role Overview:
-We are looking for a skilled Full Stack Web Developer to build and maintain scalable web applications for Cocpit’s platform.
+We’re growing fast and looking for creative, driven, and passionate interns to join our Marketing Team.
 
-Key Responsibilities:
-• Develop and maintain scalable web applications
-• Build backend APIs and services
-• Collaborate with UI/UX designers and AI engineers
-• Optimize performance and scalability of the platform
-• Maintain clean, efficient, and well-documented code
+Open Roles:
+• Content Strategist Intern
+• Content Writer / Creator Intern
+• Social Media Marketing Intern
 
-Requirements:
-• Minimum 3 years of experience in web development
-• Strong proficiency in React.js and Next.js
-• Strong backend experience with Node.js and Express.js
-• Experience working with PostgreSQL
-• Experience building and integrating REST APIs
-• Strong understanding of Git and version control
-• Understanding of authentication systems and API security
-• Experience working in Agile or startup environments
+What You’ll Do:
+• Create engaging content for social media, campaigns, and branding
+• Develop creative ideas and storytelling strategies
+• Understand audience behavior and build meaningful engagement
+• Collaborate with the team to grow Cocpit’s digital presence
+• Take ownership of projects and contribute fresh ideas
 
-Preferred Skills:
-• Docker
-• Kubernetes
-• CI/CD pipelines
-• GitHub Actions
-• Grafana
-• Python scripting
-• DevOps and cloud infrastructure knowledge
+What We’re Looking For:
+• Creative thinkers with strong communication skills
+• Passion for content, branding, and digital marketing
+• Self-driven individuals who enjoy building from scratch
+• Basic understanding of social media trends and audience engagement
 `,
   },
   {
-    title: "Android Developer",
-    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
-    type: "Full-Time",
+    title: "UI/UX Design Intern",
+    location: "Kolhapur, Maharashtra (On-site)",
+    type: "Internship",
     description: `
-Company: Cocpit
-
 Role Overview:
-Cocpit is looking for an experienced Android Developer to develop and maintain high-performance mobile applications.
+We’re looking for a creative and user-focused UI/UX Design Intern to join our growing team and help craft engaging digital experiences.
 
-Key Responsibilities:
-• Develop Android applications using Flutter
-• Integrate mobile apps with backend APIs built using Node.js and Express.js
-• Collaborate with UI/UX designers to implement intuitive mobile interfaces
-• Debug, test, and optimize applications across devices
-• Ensure performance, scalability, and reliability of the mobile application
+What You’ll Do:
+• Design clean, modern, and user-friendly interfaces for web and mobile platforms
+• Create wireframes, prototypes, and design concepts
+• Work closely with developers and product teams to improve user experience
+• Research user behavior and contribute ideas for better usability
+• Maintain consistency in branding and design systems
 
-Requirements:
-• Minimum 3 years of experience in Android or cross-platform mobile development
-• Strong experience with Flutter
-• Experience integrating REST APIs
-• Knowledge of Git version control
-• Understanding of mobile UI/UX best practices
-• Experience with mobile debugging and performance optimization
+What We’re Looking For:
+• Passion for UI/UX design and digital products
+• Creativity with strong attention to detail
+• Basic knowledge of tools like Figma, Adobe XD, or similar
+• Understanding of user-centered design principles
+• Someone eager to learn, innovate, and build impactful products
 `,
   },
   {
-    title: "iOS Developer",
-    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
-    type: "Full-Time",
+    title: "Manual Testing Intern",
+    location: "Kolhapur, Maharashtra (On-site)",
+    type: "Internship",
     description: `
-Company: Cocpit
-
 Role Overview:
-We are seeking a skilled iOS Developer to design and develop scalable and high-quality iOS applications for Cocpit.
+We’re looking for detail-oriented and curious Manual Testing Interns to join our team and help ensure a seamless user experience across our platforms.
 
-Key Responsibilities:
-• Develop iOS applications using Swift
-• Integrate backend APIs developed using Node.js and Express.js
-• Work closely with UI/UX designers and backend developers
-• Ensure application performance, responsiveness, and stability
-• Debug and resolve application issues across Apple devices
+What You’ll Do:
+• Test web and mobile applications for bugs, usability, and performance issues
+• Create and execute test cases and report defects clearly
+• Work closely with developers and product teams to improve product quality
+• Perform functional, regression, and UI testing
+• Help maintain testing documentation and reports
 
-Requirements:
-• Minimum 3 years of experience in iOS development
-• Strong experience with Swift
-• Experience integrating REST APIs
-• Familiarity with Apple SDKs and frameworks
-• Knowledge of Git and collaborative development workflows
-• Experience deploying applications to the Apple App Store
-`,
-  },
-  {
-    title: "AI / ML Developer",
-    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
-    type: "Full-Time",
-    description: `
-Company: Cocpit
-
-Role Overview:
-Cocpit is seeking an AI/ML Developer to build and deploy intelligent systems that power Cocpit’s AI infrastructure and analytics model.
-
-Key Responsibilities:
-• Design and develop machine learning models
-• Build intelligent systems powering Cocpit’s AI features
-• Integrate AI models with Node.js / Express.js APIs
-• Train, evaluate, and optimize ML models
-• Work with datasets and build scalable data pipelines
-
-Requirements:
-• Minimum 3 years of experience in AI/ML development
-• Strong proficiency in Python
-• Experience with TensorFlow, PyTorch, or similar frameworks
-• Experience deploying ML models into production systems
-• Knowledge of data pipelines and model optimization
-`,
-  },
-  {
-    title: "HR Manager",
-    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
-    type: "Full-Time",
-    description: `
-Company: Cocpit
-
-Role Overview:
-Cocpit is looking for an HR Manager to handle recruitment, employee engagement, and HR operations while supporting the hiring needs of a growing tech startup.
-
-Key Responsibilities:
-• Manage end-to-end recruitment processes
-• Conduct HR screening interviews for candidates
-• Coordinate with founders and technical teams during hiring
-• Handle employee onboarding and documentation
-• Maintain HR policies and company culture
-• Manage employee relations and HR compliance
-
-Requirements:
-• Minimum 3 years of experience in HR management
-• Experience hiring technical roles such as developers and engineers
-• Strong communication and interpersonal skills
-• Understanding of technical terminology in software development
-• Experience with HR tools and recruitment platforms
+What We’re Looking For:
+• Strong attention to detail and problem-solving skills
+• Basic understanding of software testing concepts
+• Interest in quality assurance and product improvement
+• Good communication and analytical skills
+• Someone eager to learn and grow in a fast-paced startup environment
 `,
   },
 ];
-
 const Careers: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [submittingRole, setSubmittingRole] = useState<string | null>(null);
@@ -248,7 +180,7 @@ const Careers: React.FC = () => {
         {/* Hero Section */}
         <section
           style={{
-            height: isMobile ? "auto" : "80vh",
+            height: isMobile ? "auto" : "40vh",
             minHeight: isMobile ? "50vh" : undefined,
             display: "flex",
             flexDirection: "column",
@@ -317,12 +249,12 @@ const Careers: React.FC = () => {
                     >
                       <div
                         style={{
-                          padding: isMobile ? "1.5rem" : "3rem",
+                          padding: isMobile ? "1rem 1.2rem" : "1.5rem 2rem",
                           lineHeight: "1.9",
                           fontSize: isMobile ? "0.9rem" : undefined,
                         }}
                       >
-                        <div dangerouslySetInnerHTML={{ __html: role.description.replace(/\n/g, "<br/>") }} />
+                        <div dangerouslySetInnerHTML={{ __html: role.description.trim().replace(/\n/g, "<br/>") }} />
                         <div style={{ marginTop: "2rem" }}>
                           <motion.button
                             whileHover={{ scale: submittingRole ? 1 : 1.05 }}

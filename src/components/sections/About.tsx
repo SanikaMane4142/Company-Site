@@ -160,9 +160,9 @@ const About: React.FC = () => {
             >
               <h3>Location</h3>
               <p style={{ color: "var(--text-secondary)" }}>
-                Office 504, Emerald Corner,<br />
-                2nd Lane, Rajarampuri,<br />
-                Kolhapur
+                Ratnamani Green Emerald Building,<br />
+                Mangalwar Peth, Race course Naka,<br />
+                C Ward, Kolhapur, Maharashtra
               </p>
             </div>
 

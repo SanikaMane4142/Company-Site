@@ -136,17 +136,17 @@ const About: React.FC = () => {
             <div className="glass-card">
               <h3>Location</h3>
               <p style={{ color: "var(--text-secondary)" }}>
-                Office 504, Emerald Corner <br />
-                2nd Lane, Rajarampuri <br />
-                Kolhapur
+                Ratnamani Green Emerald Building,<br />
+                Mangalwar Peth, Race course Naka,<br />
+                C Ward, Kolhapur, Maharashtra
               </p>
             </div>
 
             <div className="glass-card">
-              <h3>Working Hours</h3>
+              <h3>Working</h3>
               <p style={{ color: "var(--text-secondary)" }}>
-                Tuesday – Sunday <br />
-                09:30 AM – 05:30 PM IST
+                Flexible Hours <br />
+                Onsite
               </p>
             </div>
 
