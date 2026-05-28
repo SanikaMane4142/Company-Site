@@ -84,6 +84,57 @@ What We’re Looking For:
 • Someone eager to learn and grow in a fast-paced startup environment
 `,
   },
+  {
+    title: "AI / ML Developer",
+    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
+    type: "Full-Time",
+    description: `
+Company: Cocpit
+
+Role Overview:
+Cocpit is seeking an AI/ML Developer to build and deploy intelligent systems that power Cocpit’s AI infrastructure and analytics model.
+
+Key Responsibilities:
+• Design and develop machine learning models
+• Build intelligent systems powering Cocpit’s AI features
+• Integrate AI models with Node.js / Express.js APIs
+• Train, evaluate, and optimize ML models
+• Work with datasets and build scalable data pipelines
+
+Requirements:
+• Minimum 3 years of experience in AI/ML development
+• Strong proficiency in Python
+• Experience with TensorFlow, PyTorch, or similar frameworks
+• Experience deploying ML models into production systems
+• Knowledge of data pipelines and model optimization
+`,
+  },
+  {
+    title: "HR Manager",
+    location: "Kolhapur, Maharashtra (On-site) · Min 3 Years",
+    type: "Full-Time",
+    description: `
+Company: Cocpit
+
+Role Overview:
+Cocpit is looking for an HR Manager to handle recruitment, employee engagement, and HR operations while supporting the hiring needs of a growing tech startup.
+
+Key Responsibilities:
+• Manage end-to-end recruitment processes
+• Conduct HR screening interviews for candidates
+• Coordinate with founders and technical teams during hiring
+• Handle employee onboarding and documentation
+• Maintain HR policies and company culture
+• Manage employee relations and HR compliance
+
+Requirements:
+• Minimum 3 years of experience in HR management
+• Experience hiring technical roles such as developers and engineers
+• Strong communication and interpersonal skills
+• Understanding of technical terminology in software development
+• Experience with HR tools and recruitment platforms
+`,
+  },
 ];
 const Careers: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
